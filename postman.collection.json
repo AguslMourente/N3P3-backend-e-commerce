@@ -1,0 +1,17 @@
+{
+  "info": { "name": "Ecommerce Backend", "_postman_id": "ecb-collection-001", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:3000" }, { "key": "token", "value": "" }],
+  "item": [
+    { "name": "Auth - pedir código", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "url": "{{baseUrl}}/auth", "body": { "mode": "raw", "raw": "{\"email\":\"test@example.com\"}" } } },
+    { "name": "Auth - token", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "url": "{{baseUrl}}/auth/token", "body": { "mode": "raw", "raw": "{\"email\":\"test@example.com\",\"code\":\"123456\"}" } } },
+    { "name": "ME - info", "request": { "method": "GET", "header": [{"key":"Authorization","value":"Bearer {{token}}"}], "url": "{{baseUrl}}/me" } },
+    { "name": "ME - patch nombre", "request": { "method": "PATCH", "header": [{"key":"Content-Type","value":"application/json"},{"key":"Authorization","value":"Bearer {{token}}"}], "url": "{{baseUrl}}/me", "body": { "mode":"raw","raw":"{\"name\":\"Agus\"}" } } },
+    { "name": "ME - patch address", "request": { "method": "PATCH", "header": [{"key":"Content-Type","value":"application/json"},{"key":"Authorization","value":"Bearer {{token}}"}], "url": "{{baseUrl}}/me/address", "body": { "mode":"raw","raw":"{\"street\":\"Gran Vía\",\"city\":\"Madrid\"}" } } },
+    { "name": "Search", "request": { "method": "GET", "url": "{{baseUrl}}/search?q=laptop&offset=0&limit=10" } },
+    { "name": "Get product", "request": { "method": "GET", "url": "{{baseUrl}}/products/1" } },
+    { "name": "Crear orden", "request": { "method": "POST", "header": [{"key":"Authorization","value":"Bearer {{token}}"}], "url": "{{baseUrl}}/order?productid=1" } },
+    { "name": "Mis órdenes", "request": { "method": "GET", "header": [{"key":"Authorization","value":"Bearer {{token}}"}], "url": "{{baseUrl}}/me/orders" } },
+    { "name": "Detalle orden", "request": { "method": "GET", "url": "{{baseUrl}}/order/1" } },
+    { "name": "Webhook MP (fake)", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "url": "{{baseUrl}}/mp/mercadopago", "body": { "mode": "raw", "raw": "{\"external_reference\":\"1\",\"status\":\"approved\"}" } } }
+  ]
+}
